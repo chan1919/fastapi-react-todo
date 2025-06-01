@@ -1,0 +1,40 @@
+.app-header {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.header-icon {
+  font-size: 24px;
+  color: white;
+  margin-right: 12px;
+}
+
+.header-title {
+  margin: 0;
+  color: white !important;
+}
+
+@media (max-width: 576px) {
+  .app-header {
+    padding: 0 16px;
+  }
+
+  .header-title {
+    font-size: 18px !important;
+  }
+
+  .header-icon {
+    font-size: 20px;
+  }
+}
