@@ -126,7 +126,8 @@ fastapi-react/
 
 如有任何问题或建议，请通过以下方式联系我：
 
-- GitHub: [你的 GitHub 用户名](https://github.com/chan1919)
+- GitHub: [chan1919](https://github.com/chan1919)
+- @X: [ suoni](https://x.com/czyncu)
 - 邮箱: suoni1919@gmail.com
 
 ---
