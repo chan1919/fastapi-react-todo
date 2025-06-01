@@ -1,0 +1,53 @@
+.todos-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.section-title {
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.todos-filters {
+  margin-bottom: 24px;
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.todos-list {
+  margin-top: 16px;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.todos-summary {
+  margin-top: 24px;
+  text-align: right;
+  padding: 12px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* 响应式调整 */
+@media (max-width: 576px) {
+  .todos-container {
+    padding: 8px;
+  }
+
+  .todos-filters {
+    padding: 12px;
+  }
+
+  .todos-filters .ant-row {
+    row-gap: 16px;
+  }
+}
