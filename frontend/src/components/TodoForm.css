@@ -1,0 +1,23 @@
+.todo-form-card {
+  margin-bottom: 24px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.form-expanded {
+  margin-top: 16px;
+}
+
+/* 响应式调整 */
+@media (min-width: 768px) {
+  .form-expanded {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 16px;
+  }
+
+  .form-expanded .ant-form-item:last-child {
+    grid-column: 1 / 3;
+    margin-bottom: 0;
+  }
+}
