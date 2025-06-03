@@ -136,4 +136,4 @@ fastapi-react/
 
 ---
 
-[![Visitors](https://api.visitorbadge.io/api/visitors?path=https://github.com/chan1919/fastapi-react-todo)](https://github.com/chan1919/fastapi-react-todo)
+[![访问量](https://api.visitorbadge.io/api/visitors?path=https://github.com/chan1919/fastapi-react-todo)](https://github.com/chan1919/fastapi-react-todo)
