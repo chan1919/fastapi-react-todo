@@ -1,6 +1,12 @@
 import { Todo, TodoCreateRequest, TodoUpdateRequest } from '../types/todo';
 
-const API_BASE_URL = 'http://localhost:8000';
+// 动态获取API基础URL
+const getBaseUrl = () => {
+  // 开发环境使用localhost:8000，生产环境使用相对路径
+  return process.env.NODE_ENV === 'development'
+    ? 'http://localhost:8000'
+    : '/api';
+};
 
 // 错误处理函数
 const handleError = (error: any): never => {
@@ -43,7 +49,7 @@ const camelToSnake = (obj: any): any => {
 // 获取所有待办事项
 export const fetchTodos = async (): Promise<Todo[]> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/todo`);
+    const response = await fetch(`${getBaseUrl()}/todo`);
     if (!response.ok) {
       throw new Error(`HTTP错误: ${response.status}`);
     }
@@ -58,7 +64,7 @@ export const fetchTodos = async (): Promise<Todo[]> => {
 // 获取单个待办事项
 export const fetchTodoById = async (id: number): Promise<Todo> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/todo/${id}`);
+    const response = await fetch(`${getBaseUrl()}/todo/${id}`);
     if (!response.ok) {
       throw new Error(`HTTP错误: ${response.status}`);
     }
@@ -76,7 +82,7 @@ export const createTodo = async (todo: TodoCreateRequest): Promise<Todo> => {
     // 转换为蛇形命名
     const snakeCaseTodo = camelToSnake(todo);
 
-    const response = await fetch(`${API_BASE_URL}/todo`, {
+    const response = await fetch(`${getBaseUrl()}/todo`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -100,7 +106,7 @@ export const updateTodo = async (id: number, todo: TodoUpdateRequest): Promise<T
     // 转换为蛇形命名
     const snakeCaseTodo = camelToSnake(todo);
 
-    const response = await fetch(`${API_BASE_URL}/todo/${id}`, {
+    const response = await fetch(`${getBaseUrl()}/todo/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -121,7 +127,7 @@ export const updateTodo = async (id: number, todo: TodoUpdateRequest): Promise<T
 // 删除待办事项
 export const deleteTodo = async (id: number): Promise<void> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/todo/${id}`, {
+    const response = await fetch(`${getBaseUrl()}/todo/${id}`, {
       method: 'DELETE',
     });
     if (!response.ok) {
