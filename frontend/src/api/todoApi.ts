@@ -1,14 +1,14 @@
-import type { Todo, TodoCreateRequest, TodoUpdateRequest } from '../types/todo';
+import { Todo, TodoCreateRequest, TodoUpdateRequest } from '../types/todo';
 
 const API_BASE_URL = 'http://localhost:8000';
 
-//处理错误函数
+// 错误处理函数
 const handleError = (error: any): never => {
-    console.error("API错误:", error);
-    throw new Error(error.message||"请求失败")
-}
+  console.error('API错误:', error);
+  throw new Error(error.message || '请求失败');
+};
 
-//蛇形=>驼峰
+// 将蛇形命名转换为驼峰命名
 const snakeToCamel = (obj: any): any => {
   if (Array.isArray(obj)) {
     return obj.map(snakeToCamel);
@@ -24,7 +24,7 @@ const snakeToCamel = (obj: any): any => {
   return obj;
 };
 
-//驼峰=>蛇形
+// 将驼峰命名转换为蛇形命名
 const camelToSnake = (obj: any): any => {
   if (Array.isArray(obj)) {
     return obj.map(camelToSnake);
@@ -40,62 +40,59 @@ const camelToSnake = (obj: any): any => {
   return obj;
 };
 
-// 获取所有Todo
+// 获取所有待办事项
 export const fetchTodos = async (): Promise<Todo[]> => {
-    try {
-        const response = await fetch(`${API_BASE_URL}/todo`);
-        if (!response.ok) {
-            throw new Error(`HTTP错误:${response.status}`);
-        }
-        const data = await response.json();
-        //驼峰转化
-        return snakeToCamel(data) || [];
-    } catch (error) {
-        return handleError(error);
+  try {
+    const response = await fetch(`${API_BASE_URL}/todo`);
+    if (!response.ok) {
+      throw new Error(`HTTP错误: ${response.status}`);
     }
+    const data = await response.json();
+    // 转换为驼峰命名
+    return snakeToCamel(data) || [];
+  } catch (error) {
+    return handleError(error);
+  }
 };
 
-
-//获取单个Todo
+// 获取单个待办事项
 export const fetchTodoById = async (id: number): Promise<Todo> => {
-    try {
-        const response = await fetch(`${API_BASE_URL}/todo/${id}`);
-        if (!response.ok) {
-            throw new Error(`HTTP错误:${ response.status }`);
-        }
-        const data = await response.json();
-        //驼峰
-        return snakeToCamel(data);
-    } catch (error) {
-        return handleError(error)
+  try {
+    const response = await fetch(`${API_BASE_URL}/todo/${id}`);
+    if (!response.ok) {
+      throw new Error(`HTTP错误: ${response.status}`);
     }
-}
-
-// 创建Todo
-export const createTodo = async (todo: TodoCreateRequest): Promise<Todo> => {
-    try {
-        const snakeCaseTodo = camelToSnake(todo);
-
-        const response = await fetch(`${API_BASE_URL}/todo`, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(snakeCaseTodo),
-        });
-        if (!response.ok) {
-            throw new Error(`HTTP错误:${response.status}`);
-        }
-
-        const data = await response.json();
-
-        return snakeToCamel(data);
-
-    } catch (error) {
-        return handleError(error);
-    }
+    const data = await response.json();
+    // 转换为驼峰命名
+    return snakeToCamel(data);
+  } catch (error) {
+    return handleError(error);
+  }
 };
 
+// 创建待办事项
+export const createTodo = async (todo: TodoCreateRequest): Promise<Todo> => {
+  try {
+    // 转换为蛇形命名
+    const snakeCaseTodo = camelToSnake(todo);
+
+    const response = await fetch(`${API_BASE_URL}/todo`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(snakeCaseTodo),
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP错误: ${response.status}`);
+    }
+    const data = await response.json();
+    // 转换为驼峰命名
+    return snakeToCamel(data);
+  } catch (error) {
+    return handleError(error);
+  }
+};
 
 // 更新待办事项
 export const updateTodo = async (id: number, todo: TodoUpdateRequest): Promise<Todo> => {

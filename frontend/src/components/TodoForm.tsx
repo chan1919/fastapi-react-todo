@@ -1,9 +1,9 @@
-import React from "react";
-import { Form, Input, Button, Select, Card } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
-import type { TodoCreateRequest } from "../types/todo";
-import { useTodoContext } from "../context/TodoContext";
-import "./TodoForm.css";
+import React from 'react';
+import { Form, Input, Button, Select, Card } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+import { TodoCreateRequest } from '../types/todo';
+import { useTodoContext } from '../context/TodoContext';
+import './TodoForm.css';
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -24,15 +24,15 @@ const TodoForm: React.FC = () => {
         layout="vertical"
         onFinish={handleSubmit}
         initialValues={{
-          item: "",
-          description: "",
+          item: '',
+          description: '',
           priority: 3,
           isCompleted: false,
         }}
       >
         <Form.Item
           name="item"
-          rules={[{ required: true, message: "请输入待办事项内容" }]}
+          rules={[{ required: true, message: '请输入待办事项内容' }]}
         >
           <Input
             placeholder="输入新的待办事项"
@@ -42,11 +42,20 @@ const TodoForm: React.FC = () => {
         </Form.Item>
 
         <div className="form-expanded">
-          <Form.Item name="description" label="描述">
-            <TextArea placeholder="添加描述（可选）" rows={3} />
+          <Form.Item
+            name="description"
+            label="描述"
+          >
+            <TextArea
+              placeholder="添加描述（可选）"
+              rows={3}
+            />
           </Form.Item>
 
-          <Form.Item name="priority" label="优先级">
+          <Form.Item
+            name="priority"
+            label="优先级"
+          >
             <Select>
               <Option value={1}>很低</Option>
               <Option value={2}>低</Option>
@@ -57,7 +66,12 @@ const TodoForm: React.FC = () => {
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" loading={loading} block>
+            <Button
+              type="primary"
+              htmlType="submit"
+              loading={loading}
+              block
+            >
               添加待办事项
             </Button>
           </Form.Item>

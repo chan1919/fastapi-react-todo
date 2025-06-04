@@ -10,10 +10,7 @@ const AppHeader: React.FC = () => {
   const { token } = theme.useToken();
 
   return (
-    <Header
-      className="app-header"
-      style={{ backgroundColor: token.colorPrimary }}
-    >
+    <Header className="app-header" style={{ backgroundColor: token.colorPrimary }}>
       <div className="header-content">
         <CheckCircleOutlined className="header-icon" />
         <Title level={3} className="header-title">
