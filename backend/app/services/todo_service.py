@@ -46,7 +46,7 @@ class TodoService:
 
         return todo
 
-    def detete_todo(self, todo_id: int) -> bool:
+    def delete_todo(self, todo_id: int) -> bool:
         """删除Todo"""
         todo = self.get_todo_by_id(todo_id=todo_id)
         if not todo:

@@ -51,9 +51,9 @@ async def update_todo(
 
 
 @router.delete(path="/{todo_id}", status_code=status.HTTP_204_NO_CONTENT)
-async def detele_todo(todo_id: int, session: Session = Depends(get_session)):
+async def delete_todo(todo_id: int, session: Session = Depends(get_session)):
     todo_service = TodoService(session=session)
-    success = todo_service.detete_todo(todo_id=todo_id)
+    success = todo_service.delete_todo(todo_id=todo_id)
     if not success:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,

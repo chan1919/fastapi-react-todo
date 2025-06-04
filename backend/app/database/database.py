@@ -5,8 +5,12 @@ from typing import Generator
 # 获取根目录
 Base_DIR = Path(__file__).resolve().parent.parent.parent
 
+# 确保数据库目录存在
+DB_DIR = Base_DIR / "app" / "database"
+DB_DIR.mkdir(parents=True, exist_ok=True)
+
 # sqlite
-SQLITE_URL = f"sqlite:///{(Base_DIR / 'app' / 'todos.db')}"
+SQLITE_URL = f"sqlite:///{DB_DIR / 'todos.db'}"
 
 engine = create_engine(SQLITE_URL, echo=True, connect_args={"check_same_thread": False})
 
