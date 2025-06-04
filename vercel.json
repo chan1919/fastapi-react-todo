@@ -2,13 +2,6 @@
   "version": 2,
   "builds": [
     {
-      "src": "frontend/**/*.ts",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "frontend/dist"
-      }
-    },
-    {
       "src": "/backend/app/main.py",
       "use": "@vercel/python"
     }
@@ -27,3 +20,4 @@
     "APP_MODULE": "backend.app.main:app"
   }
 }
+
