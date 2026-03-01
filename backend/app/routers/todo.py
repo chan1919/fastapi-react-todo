@@ -9,10 +9,31 @@ from ..services.todo_service import TodoService
 router = APIRouter(prefix="/todo", tags=["todos"])
 
 
+# 安全修复：添加合理的查询限制
+# 问题：原始代码 limit=100 允许返回过多数据，可能导致：
+# 1. 内存消耗过大
+# 2. 响应时间过长
+# 3. 数据库压力
+# 最佳实践：限制单次查询返回的最大数量
+MAX_QUERY_LIMIT = 50
+
+
 @router.get(path="/", response_model=List[TodoResponse])
 async def get_todos(
-    skip: int = 0, limit: int = 100, session: Session = Depends(get_session)
+    skip: int = 0, 
+    limit: int = 20,  # 默认改为20，更合理的分页大小
+    session: Session = Depends(get_session)
 ):
+    # 安全修复：验证分页参数
+    # 问题：负数skip或过大的limit可能导致问题
+    # 最佳实践：限制参数范围
+    if skip < 0:
+        skip = 0
+    if limit < 1:
+        limit = 20
+    if limit > MAX_QUERY_LIMIT:
+        limit = MAX_QUERY_LIMIT
+    
     todo_service = TodoService(session=session)
     todos = todo_service.get_todos(skip=skip, limit=limit)
     return todos
@@ -37,8 +58,14 @@ async def create_todo(todo: TodoCreate, session: Session = Depends(get_session))
 
 
 @router.put(path="/{todo_id}", response_model=TodoResponse)
+# Bug修复：添加Session类型注解
+# 问题：session参数缺少类型注解，这会导致：
+# 1. IDE无法提供正确的代码补全
+# 2. 类型检查工具无法正确分析
+# 3. 运行时行为可能不一致
+# 最佳实践：始终为依赖注入的参数添加明确的类型注解
 async def update_todo(
-    todo_id: int, todo_update: TodoUpdate, session=Depends(get_session)
+    todo_id: int, todo_update: TodoUpdate, session: Session = Depends(get_session)
 ):
     todo_service = TodoService(session=session)
     updated_todo = todo_service.update_todo(todo_id=todo_id, todo_update=todo_update)
