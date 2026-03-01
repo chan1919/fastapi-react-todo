@@ -1,15 +1,19 @@
 {
-  "name": "frontend",
+  "name": "fastapi-react-todo-frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "FastAPI React Todo 应用前端 - 教学项目",
+  "author": "chan1919",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "type-check": "tsc --noEmit"
   },
-"dependencies": {
+  "dependencies": {
     "antd": "^5.0.0",
     "@ant-design/icons": "^5.0.0",
     "react": "^18.3.1",
@@ -27,5 +31,13 @@
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.18.2",
     "vite": "^6.0.5"
-  }
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "fastapi",
+    "todo",
+    "tutorial",
+    "ant-design"
+  ]
 }
